@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter & Calculator WebApp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        select {
+            padding: 5px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Converter & Calculator WebApp</h1>
+        <div class="converter">
+            <h2>Converter</h2>
+            <div class="input-group">
+                <input type="number" id="fahrenheit" placeholder="°F to °C">
+                <button onclick="convertToFahrenheitToCelsius()">Convert</button>
+                <span id="celsiusResult"></span>
+            </div>
+            <div class="input-group">
+                <input type="number" id="meters" placeholder="m to cm">
+                <button onclick="convertMetersToCentimeters()">Convert</button>
+                <span id="centimetersResult"></span>
+            </div>
+            <div class="input-group">
+                <input type="number" id="sqkm" placeholder="km^2 to meter^2">
+                <button onclick="convertSqkmToSqm()">Convert</button>
+                <span id="sqmResult"></span>
+            </div>
+        </div>
+        <div class="calculator">
+            <h2>Calculator</h2>
+            <div class="input-group">
+                <input type="number" id="num1">
+                <select id="operator">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="x^2">x²</option>
+                    <option value="sqrt">√</option>
+                    <option value="/">/</option>
+                </select>
+                <input type="number" id="num2">
+                <button onclick="calculate()">Calculate</button>
+            </div>
+            <p id="calcResult"></p>
+        </div>
+    </div>
+
+    <script>
+        function convertToFahrenheitToCelsius() {
+            const fahrenheit = parseFloat(document.getElementById("fahrenheit").value);
+            const celsius = (fahrenheit - 32) * 5/9;
+            document.getElementById("celsiusResult").textContent = celsius.toFixed(2) + " °C";
+        }
+
+        function convertMetersToCentimeters() {
+            const meters = parseFloat(document.getElementById("meters").value);
+            const centimeters = meters * 100;
+            document.getElementById("centimetersResult").textContent = centimeters + " cm";
+        }
+
+        function convertSqkmToSqm() {
+            const sqkm = parseFloat(document.getElementById("sqkm").value);
+            const sqm = sqkm * 1000000;
+            document.getElementById("sqmResult").textContent = sqm + " sqm";
+        }
+
+        function calculate() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            const operator = document.getElementById("operator").value;
+            let result;
+            switch (operator) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "x^2":
+                    result = num1 * num1;
+                    break;
+                case "sqrt":
+                    result = Math.sqrt(num1);
+                    break;
+                case "/":
+                    result = num1 / num2;
+                    break;
+                default:
+                    result = "Invalid operator";
+                    break;
+            }
+            document.getElementById("calcResult").textContent = "Result: " + result;
+        }
+    </script>
+</body>
+</html>
